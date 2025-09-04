@@ -1,0 +1,11 @@
+fastapi
+uvicorn[standard]
+SQLAlchemy
+pydantic[email]
+passlib[bcrypt]
+python-jose[cryptography]
+pytz
+pandas
+statsmodels
+xhtml2pdf
+playwright

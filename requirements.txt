@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+SQLAlchemy
+pandas
+statsmodels
+playwright
+python-jose[cryptography]
+passlib[bcrypt]
+python-multipart
+pdfkit
