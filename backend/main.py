@@ -29,8 +29,13 @@ from starlette.middleware.sessions import SessionMiddleware # Import SessionMidd
 # Import your models for SQLAdmin
 from .models import User, Evaluation, WhatsAppContact, DistributionList, EmailContact, EmailDistributionList, ActionStatus
 
-from .database import SessionLocal # Add this import at the top of main.py
-from .security import authenticate_user # Add this import at the top of main.py
+from sqladmin import Admin, ModelView
+from sqladmin.authentication import AuthenticationBackend
+from starlette.responses import RedirectResponse
+from starlette.middleware.sessions import SessionMiddleware # Import SessionMiddleware
+
+# Import your models for SQLAdmin
+from .models import User, Evaluation, WhatsAppContact, DistributionList, EmailContact, EmailDistributionList, ActionStatus
 
 # Define ModelViews for your models
 class UserAdmin(ModelView, model=User):
@@ -99,12 +104,9 @@ class AdminAuth(AuthenticationBackend):
         username = form.get("username")
         password = form.get("password")
 
-        # Use your existing authentication logic
-        with SessionLocal() as db: # Get a database session
-            user = authenticate_user(db, username, password)
-            if user and user.role == "administrador": # Check if user exists and has admin role
-                request.session["token"] = user.username # Store something to identify the user in session
-                return True
+        if username == "admin" and password == "admin": # DANGER: HARDCODED CREDENTIALS
+            request.session["token"] = "admin_session_token" # Placeholder token
+            return True
         return False
 
     async def logout(self, request) -> bool:
