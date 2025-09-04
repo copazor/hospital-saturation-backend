@@ -143,7 +143,7 @@ app.add_middleware(SessionMiddleware, secret_key="Inicio.2024") # CHANGE THIS!
 # Configuración de CORS para permitir la comunicación con el frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "https://hospital-saturation-frontend.vercel.app"],
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "DELETE", "PATCH"],
     allow_headers=["*"],
